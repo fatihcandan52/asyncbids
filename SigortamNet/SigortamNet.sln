@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SigortamNet.MVC", "SigortamNet.MVC\SigortamNet.MVC.csproj", "{1D3228BD-8E3A-4F00-B5AE-CAD5B377DDE4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SigortamNet.ASigorta", "SigortamNet.ASigorta\SigortamNet.ASigorta.csproj", "{A109EB30-8F31-422F-AF8E-CD3D7313AE49}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SigortamNet.Data", "SigortamNet.Data\SigortamNet.Data.csproj", "{C57F9235-B993-49DF-91F1-A5983DCEED22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigortamNet.Application", "SigortamNet.Application\SigortamNet.Application.csproj", "{8858AEF2-5361-44B9-847A-BDC074382166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigortamNet.Application.Contracts", "SigortamNet.Application.Contracts\SigortamNet.Application.Contracts.csproj", "{AA91D8A0-896D-4773-9B39-462030359DB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigortamNet.Core", "SigortamNet.Core\SigortamNet.Core.csproj", "{D2809EB4-D486-4F0C-81AA-C45E2F818DD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D3228BD-8E3A-4F00-B5AE-CAD5B377DDE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D3228BD-8E3A-4F00-B5AE-CAD5B377DDE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D3228BD-8E3A-4F00-B5AE-CAD5B377DDE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D3228BD-8E3A-4F00-B5AE-CAD5B377DDE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A109EB30-8F31-422F-AF8E-CD3D7313AE49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A109EB30-8F31-422F-AF8E-CD3D7313AE49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A109EB30-8F31-422F-AF8E-CD3D7313AE49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A109EB30-8F31-422F-AF8E-CD3D7313AE49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C57F9235-B993-49DF-91F1-A5983DCEED22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C57F9235-B993-49DF-91F1-A5983DCEED22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57F9235-B993-49DF-91F1-A5983DCEED22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C57F9235-B993-49DF-91F1-A5983DCEED22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8858AEF2-5361-44B9-847A-BDC074382166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8858AEF2-5361-44B9-847A-BDC074382166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8858AEF2-5361-44B9-847A-BDC074382166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8858AEF2-5361-44B9-847A-BDC074382166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA91D8A0-896D-4773-9B39-462030359DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA91D8A0-896D-4773-9B39-462030359DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA91D8A0-896D-4773-9B39-462030359DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA91D8A0-896D-4773-9B39-462030359DB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2809EB4-D486-4F0C-81AA-C45E2F818DD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2809EB4-D486-4F0C-81AA-C45E2F818DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2809EB4-D486-4F0C-81AA-C45E2F818DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2809EB4-D486-4F0C-81AA-C45E2F818DD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5FDD455-5B6B-4811-AA2D-103B40E43C8C}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,131 @@
+﻿@model VisitorViewModel
+
+@{
+    ViewData["Title"] = "Teklif Al";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Hoşgeldiniz</h1>
+    <div class="wizard-container">
+        <div class="card wizard-card" data-color="blue" id="wizard">
+            <form action="" method="">
+                <div class="wizard-header">
+                    <h3 class="wizard-title">
+                        Teklif Al
+                    </h3>
+                    <h5>Teklif almak için aşağıdaki adımları gerçekleştiriniz</h5>
+                </div>
+                <div class="wizard-navigation">
+                    <ul>
+                        <li><a href="#details" data-toggle="tab">Adım -1</a></li>
+                        <li><a href="#captain" data-toggle="tab">Adım -2</a></li>
+                        <li><a href="#description" data-toggle="tab">Teklifler</a></li>
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane" id="details">
+                        <div class="row pt-5">
+                            <div class="col-lg-6">
+                                <div class="form-group label-floating">
+                                    <label class="control-label" asp-for="IdentificationNumber"></label>
+                                    <input asp-for="IdentificationNumber" type="text" class="form-control">
+                                    <span asp-validation-for="IdentificationNumber"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group label-floating">
+                                    <label class="control-label" asp-for="LicensePlate"></label>
+                                    <input asp-for="LicensePlate" type="text" class="form-control">
+                                    <span asp-validation-for="LicensePlate"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="captain">
+                        <div class="row pt-5">
+                            <div class="col-lg-6">
+                                <div class="form-group label-floating">
+                                    <label class="control-label" asp-for="LicenseSerialCode"></label>
+                                    <input asp-for="LicenseSerialCode" type="text" class="form-control">
+                                    <span asp-validation-for="LicenseSerialCode"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group label-floating">
+                                    <label class="control-label" asp-for="LicenseSerialNo"></label>
+                                    <input asp-for="LicenseSerialNo" type="text" class="form-control">
+                                    <span asp-validation-for="LicenseSerialNo"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="description">
+                        <div class="row mt-4 mb-4">
+                            <div class="col-lg-12">
+                                <div class="card text-center block-shadow">
+                                    <div class="card-header">
+                                        Featured
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Special title treatment</h5>
+                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        2 days ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-4">
+                            <div class="col-lg-12">
+                                <div class="card text-center block-shadow">
+                                    <div class="card-header">
+                                        Featured
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Special title treatment</h5>
+                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        2 days ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-4">
+                            <div class="col-lg-12">
+                                <div class="card text-center block-shadow">
+                                    <div class="card-header">
+                                        Featured
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Special title treatment</h5>
+                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        2 days ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wizard-footer">
+                    <div class="float-right">
+                        <input type='button' class='btn btn-next btn-fill btn-info btn-wd' name='next' value='Sonraki Adım' />
+                    </div>
+                    <div class="float-left">
+                        <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Önceki Adım' />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

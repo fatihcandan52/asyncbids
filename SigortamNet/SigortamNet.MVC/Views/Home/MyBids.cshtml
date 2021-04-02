@@ -1,0 +1,28 @@
+﻿@model MyBidsViewModel
+
+@{
+    ViewData["Title"] = "Önceki Tekliflerim";
+}
+
+<div class="text-center">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h4>@ViewData["Title"]</h4>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label asp-for="IdentificationNumber"></label>
+                        <input type="text" class="form-control" asp-for="IdentificationNumber">
+                        <span asp-validation-for="IdentificationNumber"></span>
+                    </div>
+                    <button type="submit" class="btn btn-info">Sorgula</button>
+                </form>
+            </div>
+            <div class="card-footer">
+               
+            </div>
+        </div>
+    </div>
+</div>
