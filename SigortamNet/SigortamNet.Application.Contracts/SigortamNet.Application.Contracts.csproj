@@ -1,13 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Operations\Bid\Dtos\" />
-    <Folder Include="Operations\Partner\Dtos\" />
-    <Folder Include="Operations\Visitor\Dtos\" />
+    <ProjectReference Include="..\SigortamNet.Contracts\SigortamNet.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
