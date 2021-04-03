@@ -11,11 +11,11 @@
                 <h4>@ViewData["Title"]</h4>
             </div>
             <div class="card-body">
-                <form>
+                <form asp-formhelper="true" asp-controller="Home" asp-action="MyLastBids">
                     <div class="form-group">
                         <label asp-for="IdentificationNumber"></label>
                         <input type="text" class="form-control" asp-for="IdentificationNumber">
-                        <span asp-validation-for="IdentificationNumber"></span>
+                        <span class="text-danger" asp-validation-for="IdentificationNumber"></span>
                     </div>
                     <button type="submit" class="btn btn-info">Sorgula</button>
                 </form>

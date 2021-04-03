@@ -11,7 +11,7 @@ namespace SigortamNet.MVC.Validations
                 .NotEmpty().WithMessage("Lütfen T.C. kimlik numaranızı giriniz");
 
             RuleFor(x => x.LicensePlate)
-                .NotEmpty().WithMessage("Lütfen araçplakanızı giriniz");
+                .NotEmpty().WithMessage("Lütfen araç plakanızı giriniz");
 
             RuleFor(x => x.LicenseSerialCode)
                .NotEmpty().WithMessage("Lütfen ruhsat seri kodunu giriniz");

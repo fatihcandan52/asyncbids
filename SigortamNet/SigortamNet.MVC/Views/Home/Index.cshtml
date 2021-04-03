@@ -30,14 +30,14 @@
                                 <div class="form-group label-floating">
                                     <label class="control-label" asp-for="IdentificationNumber"></label>
                                     <input asp-for="IdentificationNumber" type="text" class="form-control">
-                                    <span asp-validation-for="IdentificationNumber"></span>
+                                    <span class="text-danger" asp-validation-for="IdentificationNumber"></span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label" asp-for="LicensePlate"></label>
                                     <input asp-for="LicensePlate" type="text" class="form-control">
-                                    <span asp-validation-for="LicensePlate"></span>
+                                    <span class="text-danger" asp-validation-for="LicensePlate"></span>
                                 </div>
                             </div>
                         </div>
@@ -49,14 +49,14 @@
                                 <div class="form-group label-floating">
                                     <label class="control-label" asp-for="LicenseSerialCode"></label>
                                     <input asp-for="LicenseSerialCode" type="text" class="form-control">
-                                    <span asp-validation-for="LicenseSerialCode"></span>
+                                    <span class="text-danger" asp-validation-for="LicenseSerialCode"></span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label" asp-for="LicenseSerialNo"></label>
                                     <input asp-for="LicenseSerialNo" type="text" class="form-control">
-                                    <span asp-validation-for="LicenseSerialNo"></span>
+                                    <span class="text-danger" asp-validation-for="LicenseSerialNo"></span>
                                 </div>
                             </div>
                         </div>
@@ -118,10 +118,10 @@
                 </div>
                 <div class="wizard-footer">
                     <div class="float-right">
-                        <input type='button' class='btn btn-next btn-fill btn-info btn-wd' name='next' value='Sonraki Adım' />
+                        <input type="submit" class='btn btn-next btn-fill btn-info btn-wd' name='next' value='Sonraki Adım' />
                     </div>
                     <div class="float-left">
-                        <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Önceki Adım' />
+                        <input type="submit" class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Önceki Adım' />
                     </div>
                     <div class="clearfix"></div>
                 </div>

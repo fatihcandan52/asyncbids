@@ -19,7 +19,7 @@ namespace SigortamNet.MVC.Extensions
         public static IServiceCollection AddRegisterWebsiteServices(this IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, EfUnitOfWork>();
-            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>)); // TODO: neden typeof lu çalışıyorda o olmadan register edemiyoruz.
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>)); // TODO: 
 
 
             return services;

@@ -1,18 +1,22 @@
 ﻿using FormHelper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SigortamNet.Application.Contracts.Operations.Bid;
 using SigortamNet.MVC.Models;
 using SigortamNet.MVC.ViewModels;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace SigortamNet.MVC.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IBidService _bidService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IBidService bidService)
         {
+            _bidService = bidService;
             _logger = logger;
         }
 
@@ -28,9 +32,16 @@ namespace SigortamNet.MVC.Controllers
             return Ok();
         }
 
-        public IActionResult MyBids()
+        public IActionResult MyLastBids()
         {
-            return View();
+            return View(new MyBidsViewModel());
+        }
+
+        public async Task<IActionResult> GetMyLastBids(MyBidsViewModel viewModel)
+        {
+            var result = await _bidService.GetListByIdentificationNumberAsync(viewModel.IdentificationNumber);
+
+            return Ok();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FluentValidation.AspNetCore;
 using FormHelper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SigortamNet.Data.Contexts;
 using SigortamNet.MVC.Extensions;
+using AutoMapper;
+using SigortamNet.Application.Operations.Partner;
 
 namespace SigortamNet.MVC
 {
@@ -32,13 +30,14 @@ namespace SigortamNet.MVC
 
             services.AddRegisterWebsiteServices();
             services.AddFluentValdationServices();
+            services.AddAutoMapper(typeof(Startup), typeof(PartnerMapper));
 
             services.AddControllersWithViews().AddFormHelper(options =>
             {
                 options.CheckTheFormFieldsMessage = "Form alanlarınızı kontrol ediniz";
                 options.RedirectDelay = 3000;
                 options.EmbeddedFiles = false;
-            });
+            }).AddFluentValidation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
