@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Operations\Bid\Dtos\" />
+    <Folder Include="Operations\Partner\Dtos\" />
+    <Folder Include="Operations\Visitor\Dtos\" />
+  </ItemGroup>
+
 </Project>
