@@ -2,11 +2,11 @@
 
 namespace SigortamNet.MVC.ViewModels
 {
-    public class VisitorViewModel
+    public class VisitorViewModel : BaseViewModel
     {
-        [Display(Name = "Plaka")]
+        [Display(Name = "Araç Plakanız")]
         public string LicensePlate { get; set; }
-        [Display(Name = "T.C. Kimlik Numarası")]
+        [Display(Name = "T.C. Kimlik Numaranız")]
         public string IdentificationNumber { get; set; }
         [Display(Name = "Ruhsat Seri Kodu")]
         public string LicenseSerialCode { get; set; }
