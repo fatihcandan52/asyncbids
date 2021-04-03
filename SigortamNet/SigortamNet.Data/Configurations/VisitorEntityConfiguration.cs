@@ -12,7 +12,7 @@ namespace SigortamNet.Data.Configurations
                 .IsRequired();
 
             builder.Property(x => x.LicensePlate)
-                .HasMaxLength(20) // Özel plakalarda düşünüldüğünde yasal sınır nedir bilemiyorum öğrenip ona göre verilmeli
+                .HasMaxLength(20)
                 .IsRequired();
 
             builder.Property(x => x.LicenseSerialCode)
