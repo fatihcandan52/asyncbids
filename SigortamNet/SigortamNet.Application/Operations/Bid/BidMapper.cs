@@ -9,7 +9,8 @@ namespace SigortamNet.Application.Operations.Bid
         public BidMapper()
         {
             CreateMap<BidInput, BidEntity>();
-            CreateMap<BidEntity, BidOutput>();
+            CreateMap<BidEntity, BidOutput>()
+                .ForMember(x => x.LicensePlate, y => y.MapFrom(z => z.Visitor.LicensePlate));
         }
     }
 }

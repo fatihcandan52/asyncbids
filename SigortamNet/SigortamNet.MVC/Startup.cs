@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SigortamNet.Application.Operations.Partner;
 using SigortamNet.Data.Contexts;
+using SigortamNet.Integration.Socket;
 using SigortamNet.MVC.Extensions;
 
 namespace SigortamNet.MVC
@@ -31,12 +32,16 @@ namespace SigortamNet.MVC
             services.AddFluentValdationServices();
             services.AddAutoMapper(typeof(Startup), typeof(PartnerMapper));
 
+            services.AddHttpClient();
+            services.AddSignalR();
+
             services.AddControllersWithViews().AddFormHelper(options =>
             {
                 options.CheckTheFormFieldsMessage = "Form alanlarınızı kontrol ediniz";
                 options.RedirectDelay = 3000;
                 options.EmbeddedFiles = false;
             }).AddFluentValidation();
+ 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,9 +68,12 @@ namespace SigortamNet.MVC
 
             app.UseEndpoints(endpoints =>
             {
+                
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapHub<InsuranceHub>("insurancehub");
             });
         }
     }

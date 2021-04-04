@@ -8,8 +8,6 @@ using SigortamNet.Application.Operations.Partner;
 using SigortamNet.Application.Operations.Visitor;
 using SigortamNet.Data.Repositories;
 using SigortamNet.Data.UnitOfWork;
-using SigortamNet.Integration.Contracts.Insurance;
-using SigortamNet.Integration.Insurance;
 using SigortamNet.MVC.Validations;
 using SigortamNet.MVC.ViewModels;
 
@@ -32,8 +30,6 @@ namespace SigortamNet.MVC.Extensions
             services.AddScoped<IBidService, BidManager>();
             services.AddScoped<IVisitorService, VisitorManager>();
             services.AddScoped<IPartnerService, PartnerManager>();
-
-            services.AddScoped<IInsuranceFactoryService, InsuranceFactoryManager>();
 
             return services;
         }

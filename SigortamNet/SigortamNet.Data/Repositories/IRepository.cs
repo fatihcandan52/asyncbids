@@ -12,6 +12,8 @@ namespace SigortamNet.Data.Repositories
 
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> query);
 
-        IQueryable<TEntity> GetList(Expression<Func<TEntity, bool>> query = null);
+        Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> query);
+
+        IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> query = null);
     }
 }

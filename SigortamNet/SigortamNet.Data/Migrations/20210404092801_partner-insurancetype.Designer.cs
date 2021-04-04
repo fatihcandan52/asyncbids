@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SigortamNet.Data.Contexts;
 
 namespace SigortamNet.Data.Migrations
 {
     [DbContext(typeof(SigortamNetContext))]
-    partial class SigortamNetContextModelSnapshot : ModelSnapshot
+    [Migration("20210404092801_partner-insurancetype")]
+    partial class partnerinsurancetype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +33,11 @@ namespace SigortamNet.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("LicensePlate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
                     b.Property<string>("Logo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -43,12 +50,7 @@ namespace SigortamNet.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("VisitorId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("VisitorId");
 
                     b.ToTable("Bids");
                 });
@@ -114,15 +116,6 @@ namespace SigortamNet.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Visitors");
-                });
-
-            modelBuilder.Entity("SigortamNet.Data.Entities.BidEntity", b =>
-                {
-                    b.HasOne("SigortamNet.Data.Entities.VisitorEntity", "Visitor")
-                        .WithMany()
-                        .HasForeignKey("VisitorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

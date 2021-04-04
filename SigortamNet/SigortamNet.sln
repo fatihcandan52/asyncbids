@@ -13,10 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigortamNet.Application", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigortamNet.Application.Contracts", "SigortamNet.Application.Contracts\SigortamNet.Application.Contracts.csproj", "{AA91D8A0-896D-4773-9B39-462030359DB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigortamNet.Integration", "SigortamNet.Integration\SigortamNet.Integration.csproj", "{5D8FE1A6-24C8-463F-9EFD-F7EEFFE20F84}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigortamNet.Integration.Contracts", "SigortamNet.Integration.Contracts\SigortamNet.Integration.Contracts.csproj", "{62F7CCF5-6D5D-4E3A-B3BE-D9DDEBAB9671}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigortamNet.Contracts", "SigortamNet.Contracts\SigortamNet.Contracts.csproj", "{FFECAAC5-367A-4D5C-8888-4C1A151DF962}"
 EndProject
 Global
@@ -45,14 +41,6 @@ Global
 		{AA91D8A0-896D-4773-9B39-462030359DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA91D8A0-896D-4773-9B39-462030359DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA91D8A0-896D-4773-9B39-462030359DB8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5D8FE1A6-24C8-463F-9EFD-F7EEFFE20F84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D8FE1A6-24C8-463F-9EFD-F7EEFFE20F84}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D8FE1A6-24C8-463F-9EFD-F7EEFFE20F84}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5D8FE1A6-24C8-463F-9EFD-F7EEFFE20F84}.Release|Any CPU.Build.0 = Release|Any CPU
-		{62F7CCF5-6D5D-4E3A-B3BE-D9DDEBAB9671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62F7CCF5-6D5D-4E3A-B3BE-D9DDEBAB9671}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62F7CCF5-6D5D-4E3A-B3BE-D9DDEBAB9671}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62F7CCF5-6D5D-4E3A-B3BE-D9DDEBAB9671}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFECAAC5-367A-4D5C-8888-4C1A151DF962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FFECAAC5-367A-4D5C-8888-4C1A151DF962}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFECAAC5-367A-4D5C-8888-4C1A151DF962}.Release|Any CPU.ActiveCfg = Release|Any CPU

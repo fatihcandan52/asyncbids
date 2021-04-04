@@ -2,11 +2,12 @@
 using Microsoft.Extensions.Logging;
 using SigortamNet.ASigorta.Models;
 using System;
+using System.Threading;
 
 namespace SigortamNet.ASigorta.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class BidsController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -29,13 +30,21 @@ namespace SigortamNet.ASigorta.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult Post(BidInput input)
+        {
+            Thread.Sleep(1000);
+
             var rnd = new Random();
 
             return Ok(new BidDto
             {
                 Name = "A Sigorta",
                 Logo = "",
-                LicensePlate = "",
+                LicensePlate = input.LicensePlate,
                 Description = Summaries[rnd.Next(0, Summaries.Length - 1)],
                 Price = rnd.Next(1000, 1500)
             });

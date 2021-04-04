@@ -1,20 +1,3 @@
-/*!
-
- =========================================================
- * Material Bootstrap Wizard - v1.0.2
- =========================================================
- 
- * Product Page: https://www.creative-tim.com/product/material-bootstrap-wizard
- * Copyright 2017 Creative Tim (http://www.creative-tim.com)
- * Licensed under MIT (https://github.com/creativetimofficial/material-bootstrap-wizard/blob/master/LICENSE.md)
- 
- =========================================================
- 
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- */
-
-// Material Bootstrap Wizard Functions
-
 var searchVisible = 0;
 var transparent = true;
 var mobile_device = false;
@@ -23,19 +6,42 @@ $(document).ready(function () {
 
     $.material.init();
 
-    /*  Activate the tooltips      */
-    //$('[rel="tooltip"]').tooltip();
-
     // Code for the Validator
-    //   var $validator = $('.wizard-card form').validate({
-    //	  rules: {
+    var $validatorStepOne = $('.wizard-card form').validate({
+        rules: {
+            IdentificationNumber: {
+                required: true,
+                minlength: 11,
+                maxlength: 11
+            },
+            LicensePlate: {
+                required: true,
+                minlength: 5,
+                maxlength: 20
+            }
+        },
+        errorPlacement: function (error, element) {
+            $(element).parent('div').addClass('has-error');
+        }
+    });
 
-    //           },
-
-    //           errorPlacement: function(error, element) {
-    //               $(element).parent('div').addClass('has-error');
-    //            }
-    //});
+    var $validatorStepTwo = $('.wizard-card form').validate({
+        rules: {
+            LicenseSerialCode: {
+                required: true,
+                maxlength: 2,
+                minlength: 2
+            },
+            LicenseSerialNo: {
+                required: true,
+                minlength: 6,
+                minlength: 6
+            }
+        },
+        errorPlacement: function (error, element) {
+            $(element).parent('div').addClass('has-error');
+        }
+    });
 
     // Wizard Initialization
     $('.wizard-card').bootstrapWizard({
@@ -44,20 +50,47 @@ $(document).ready(function () {
         'previousSelector': '.btn-previous',
 
         onNext: function (tab, navigation, index) {
-            debugger;
-            var $valid = $('.wizard-card form').valid();
-            if (!$valid) {
-                //$validator.focusInvalid();
-                return false;
+            if (index == 1) {
+                var $validOne = $('.wizard-card form').valid();
+                if (!$validOne) {
+                    $validatorStepOne.focusInvalid();
+                    return false;
+                } else {
+                    var jsonData = {
+                        identification: $("#IdentificationNumber").val(),
+                        plate: $("#LicensePlate").val()
+                    };
+
+                    $.post("/Home/GetInfoByIdentificationAndPlate", jsonData, function (response) {
+                        if (response.isSucceed) {
+                            var data = response.object;
+                            $("#LicenseSerialCode").val(data.licenseSerialCode);
+                            $("#LicenseSerialNo").val(data.licenseSerialNo);
+                        }
+                    });
+                }
+            } else if (index == 2) {
+                var $validTwo = $('.wizard-card form').valid();
+                if (!$validTwo) {
+                    $validatorStepTwo.focusInvalid();
+                    return false;
+                } else {
+                    $("#description").html("");
+
+                    connection.invoke("SendAsync", {
+                        licensePlate: $("#LicensePlate").val(),
+                        identificationNumber: $("#IdentificationNumber").val(),
+                        licenseSerialCode: $("#LicenseSerialCode").val(),
+                        licenseSerialNo: $("#LicenseSerialNo").val()
+                    });
+                }
             }
         },
 
         onPrevious: function (tab, navigation, index) {
-            debugger;
+            
         },
         onInit: function (tab, navigation, index) {
-            debugger;
-            //check number of tabs and fill the entire row
             var $total = navigation.find('li').length;
             var $wizard = navigation.closest('.wizard-card');
 
@@ -72,24 +105,14 @@ $(document).ready(function () {
 
         onTabClick: function (tab, navigation, index) {
             return false;
-            //debugger;
-            //var $valid = $('.wizard-card form').valid();
-
-            //if (!$valid) {
-            //    return false;
-            //} else {
-            //    return true;
-            //}
         },
 
         onTabShow: function (tab, navigation, index) {
-            debugger;
             var $total = navigation.find('li').length;
             var $current = index + 1;
 
             var $wizard = navigation.closest('.wizard-card');
 
-            // If it's the last tab then hide the last button and show the finish instead
             if ($current >= $total) {
                 $($wizard).find('.btn-next').hide();
                 $($wizard).find('.btn-finish').show();
@@ -122,33 +145,6 @@ $(document).ready(function () {
             refreshAnimation($wizard, index);
         }
     });
-
-
-    // Prepare the preview for profile picture
-    //$("#wizard-picture").change(function(){
-    //    readURL(this);
-    //});
-
-    //$('[data-toggle="wizard-radio"]').click(function(){
-    //    wizard = $(this).closest('.wizard-card');
-    //    wizard.find('[data-toggle="wizard-radio"]').removeClass('active');
-    //    $(this).addClass('active');
-    //    $(wizard).find('[type="radio"]').removeAttr('checked');
-    //    $(this).find('[type="radio"]').attr('checked','true');
-    //});
-
-    //$('[data-toggle="wizard-checkbox"]').click(function(){
-    //    if( $(this).hasClass('active')){
-    //        $(this).removeClass('active');
-    //        $(this).find('[type="checkbox"]').removeAttr('checked');
-    //    } else {
-    //        $(this).addClass('active');
-    //        $(this).find('[type="checkbox"]').attr('checked','true');
-    //    }
-    //});
-
-    //$('.set-full-height').css('height', 'auto');
-
 });
 
 function refreshAnimation($wizard, index) {
@@ -193,61 +189,3 @@ function refreshAnimation($wizard, index) {
 
     });
 }
-
-
- //Function to show image before upload
-
-//function readURL(input) {
-//    if (input.files && input.files[0]) {
-//        var reader = new FileReader();
-
-//        reader.onload = function (e) {
-//            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-//        }
-//        reader.readAsDataURL(input.files[0]);
-//    }
-//}
-
-//$(window).resize(function(){
-//    $('.wizard-card').each(function(){
-//        $wizard = $(this);
-
-//        index = $wizard.bootstrapWizard('currentIndex');
-//        refreshAnimation($wizard, index);
-
-//        $('.moving-tab').css({
-//            'transition': 'transform 0s'
-//        });
-//    });
-//});
-
-//materialDesign = {
-
-//    checkScrollForTransparentNavbar: debounce(function() {
-//                if($(document).scrollTop() > 260 ) {
-//                    if(transparent) {
-//                        transparent = false;
-//                        $('.navbar-color-on-scroll').removeClass('navbar-transparent');
-//                    }
-//                } else {
-//                    if( !transparent ) {
-//                        transparent = true;
-//                        $('.navbar-color-on-scroll').addClass('navbar-transparent');
-//                    }
-//                }
-//        }, 17)
-
-//}
-
-//function debounce(func, wait, immediate) {
-//	var timeout;
-//	return function() {
-//		var context = this, args = arguments;
-//		clearTimeout(timeout);
-//		timeout = setTimeout(function() {
-//			timeout = null;
-//			if (!immediate) func.apply(context, args);
-//		}, wait);
-//		if (immediate && !timeout) func.apply(context, args);
-//	};
-//};

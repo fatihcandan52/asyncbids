@@ -6,8 +6,8 @@ using SigortamNet.Contracts.Results;
 using SigortamNet.Data.Entities;
 using SigortamNet.Data.Repositories;
 using SigortamNet.Data.UnitOfWork;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SigortamNet.Application.Operations.Visitor
@@ -25,21 +25,54 @@ namespace SigortamNet.Application.Operations.Visitor
             _visitorRepository = _unitOfWork.Repository<VisitorEntity>();
         }
 
-        public async Task<ServiceResult> AddAsync(VisitorInput input)
+        public async Task<ServiceResult<VisitorOutput>> AddAsync(VisitorInput input)
         {
-            var entity = _mapper.Map<VisitorEntity>(input);
-            await _visitorRepository.AddAsync(entity);
-            await _unitOfWork.SaveChangesAsync();
-
-            return new ServiceResult(Status.Success)
+            try
             {
-                Message = "Ziyaretci bilgileri eklendi"
+                var entity = _mapper.Map<VisitorEntity>(input);
+                await _visitorRepository.AddAsync(entity);
+                await _unitOfWork.SaveChangesAsync();
+
+                return new ServiceResult<VisitorOutput>(Status.Success)
+                {
+                    Message = "Ziyaretci bilgileri eklendi",
+                    Object = _mapper.Map<VisitorOutput>(entity)
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<VisitorOutput>(Status.Error)
+                {
+                    Message = "Ziyaretci eklenirken bir hata oluştu"
+                };
+            }
+        }
+
+        public async Task<ServiceResult<VisitorOutput>> CheckGetAndInsertAsync(VisitorInput input)
+        {
+            var checkResult = await GetInfoByIdentificationAndPlate(input);
+
+            if (checkResult.IsSucceed)
+            {
+                return checkResult;
+            }
+
+            var addResult = await AddAsync(input);
+
+            if (addResult.IsSucceed)
+            {
+                return addResult;
+            }
+
+            return new ServiceResult<VisitorOutput>(Status.Error)
+            {
+                Message = "Ziyaretci kontrolü ve eklenmesi sırasında bir hata oluştu."
             };
         }
 
         public async Task<ServiceResult<List<VisitorOutput>>> GetListAsync()
         {
-            var list = await _visitorRepository.GetList().ToListAsync();
+            var list = await _visitorRepository.GetAll().ToListAsync();
 
             return new ServiceResult<List<VisitorOutput>>(Status.Success)
             {
@@ -47,13 +80,21 @@ namespace SigortamNet.Application.Operations.Visitor
             };
         }
 
-        public async Task<ServiceResult<VisitorOutput>> GetListByIdentificationAndPlateAsync(VisitorInput input)
+        public async Task<ServiceResult<VisitorOutput>> GetInfoByIdentificationAndPlate(VisitorInput input)
         {
-            var list = await _visitorRepository.GetList().ToListAsync();
+            var entity = await _visitorRepository.FirstOrDefaultAsync(x => x.IdentificationNumber == input.IdentificationNumber && x.LicensePlate == input.LicensePlate);
+
+            if (entity == null)
+            {
+                return new ServiceResult<VisitorOutput>(Status.Error)
+                {
+                    Message = "İlgili kayıt bulunamadı"
+                };
+            }
 
             return new ServiceResult<VisitorOutput>(Status.Success)
             {
-                Object = _mapper.Map<VisitorOutput>(list.FirstOrDefault())
+                Object = _mapper.Map<VisitorOutput>(entity)
             };
         }
     }

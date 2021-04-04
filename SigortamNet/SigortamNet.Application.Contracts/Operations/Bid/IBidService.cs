@@ -7,6 +7,6 @@ namespace SigortamNet.Application.Contracts.Operations.Bid
     public interface IBidService
     {
         Task<ServiceResult> AddAsync(BidInput input);
-        Task<ServiceResult<List<BidOutput>>> GetListByIdentificationNumberAsync(string identificationNumber);
+        Task<ServiceResult<List<BidOutput>>> GetLastBidsByIdentificationAsync(string identificationNumber);
     }
 }

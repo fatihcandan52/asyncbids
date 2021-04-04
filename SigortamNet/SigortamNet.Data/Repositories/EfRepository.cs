@@ -25,7 +25,7 @@ namespace SigortamNet.Data.Repositories
             await _dbSet.AddAsync(entity);
         }
 
-        public IQueryable<TEntity> GetList(Expression<Func<TEntity, bool>> query = null)
+        public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> query = null)
         {
             return query == null ? _dbSet : _dbSet.Where(query);
         }
@@ -33,6 +33,11 @@ namespace SigortamNet.Data.Repositories
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> query)
         {
             return await _dbSet.SingleOrDefaultAsync(query);
+        }
+
+        public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> query)
+        {
+            return await _dbSet.FirstOrDefaultAsync(query);
         }
     }
 }

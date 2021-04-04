@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SigortamNet.Application.Contracts.Operations.Bid;
+using SigortamNet.Application.Contracts.Operations.Partner;
 using SigortamNet.Contracts.Enums;
 using SigortamNet.Contracts.Results;
 using SigortamNet.Data.Entities;
@@ -17,7 +18,7 @@ namespace SigortamNet.Application.Operations.Bid
         private readonly IRepository<BidEntity> _bidRepository;
         private readonly IMapper _mapper;
 
-        public BidManager(IUnitOfWork unitOfWork, IMapper mapper)
+        public BidManager(IUnitOfWork unitOfWork, IPartnerService partnerService, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -36,19 +37,14 @@ namespace SigortamNet.Application.Operations.Bid
             };
         }
 
-        public async Task<ServiceResult<List<BidOutput>>> GetListByIdentificationNumberAsync()
+        public async Task<ServiceResult<List<BidOutput>>> GetLastBidsByIdentificationAsync(string identificationNumber)
         {
-            var list = await _bidRepository.GetList().ToListAsync();
+            var list = await _bidRepository.GetAll().Include(i=> i.Visitor).ToListAsync();
 
             return new ServiceResult<List<BidOutput>>(Status.Success)
             {
                 Object = _mapper.Map<List<BidOutput>>(list)
             };
-        }
-
-        public Task<ServiceResult<List<BidOutput>>> GetListByIdentificationNumberAsync(string identificationNumber)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

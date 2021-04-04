@@ -38,7 +38,7 @@ namespace SigortamNet.Application.Operations.Partner
 
         public async Task<ServiceResult<List<PartnerOutput>>> GetListAsync()
         {
-            var list = await _partnerRepository.GetList().ToListAsync();
+            var list = await _partnerRepository.GetAll(x => x.IsDeleted == false).ToListAsync();
 
             return new ServiceResult<List<PartnerOutput>>(Status.Success)
             {

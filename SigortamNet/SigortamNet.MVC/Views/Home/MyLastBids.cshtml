@@ -11,18 +11,58 @@
                 <h4>@ViewData["Title"]</h4>
             </div>
             <div class="card-body">
-                <form asp-formhelper="true" asp-controller="Home" asp-action="MyLastBids">
+                <form asp-formhelper="true" asp-controller="Home" asp-action="GetMyLastBids" asp-callback="MyLastBidsCallBack">
                     <div class="form-group">
                         <label asp-for="IdentificationNumber"></label>
                         <input type="text" class="form-control" asp-for="IdentificationNumber">
                         <span class="text-danger" asp-validation-for="IdentificationNumber"></span>
                     </div>
-                    <button type="submit" class="btn btn-info">Sorgula</button>
+                    <button type="submit" id="btnSend" class="btn btn-info">Sorgula</button>
                 </form>
+
+                <div class="row">
+                    <div class="col-12">
+                        <table id="tblLastBids" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Şirket</th>
+                                    <th>Plaka</th>
+                                    <th>Ücret</th>
+                                    <th>Açıklama</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="card-footer">
-               
+
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        function MyLastBidsCallBack(e) {
+            debugger;
+            if (e.isSucceed) {
+                var list = e.object;
+                $.each(list, function (index, value) {
+                    var _row = `<tr>
+                                    <td>${value.name}</td>
+                                    <td>${value.licensePlate}</td>
+                                    <td>${value.price}</td>
+                                    <td>${value.description}</td>
+                                </tr>`;
+                    $("#tblLastBids").append(_row);
+                });
+            }
+
+            $("#btnSend").removeAttr("disabled");
+        }
+    </script>
+}

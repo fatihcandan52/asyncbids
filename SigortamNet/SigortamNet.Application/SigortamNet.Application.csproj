@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -11,7 +11,6 @@
   <ItemGroup>
     <ProjectReference Include="..\SigortamNet.Application.Contracts\SigortamNet.Application.Contracts.csproj" />
     <ProjectReference Include="..\SigortamNet.Data\SigortamNet.Data.csproj" />
-    <ProjectReference Include="..\SigortamNet.Integration\SigortamNet.Integration.csproj" />
   </ItemGroup>
 
 </Project>

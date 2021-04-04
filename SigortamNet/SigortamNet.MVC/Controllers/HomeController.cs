@@ -1,23 +1,21 @@
 ﻿using FormHelper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SigortamNet.Application.Contracts.Operations.Bid;
-using SigortamNet.MVC.Models;
+using SigortamNet.Application.Contracts.Operations.Visitor;
 using SigortamNet.MVC.ViewModels;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace SigortamNet.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IBidService _bidService;
+        private readonly IVisitorService _visitorService;
 
-        public HomeController(ILogger<HomeController> logger, IBidService bidService)
+        public HomeController(IBidService bidService, IVisitorService visitorService)
         {
             _bidService = bidService;
-            _logger = logger;
+            _visitorService = visitorService;
         }
 
         public IActionResult Index()
@@ -25,29 +23,36 @@ namespace SigortamNet.MVC.Controllers
             return View(new VisitorViewModel());
         }
 
-        [HttpPost, FormValidator]
-        public IActionResult GetNewBids(VisitorViewModel viewModel)
-        {
-
-            return Ok();
-        }
-
         public IActionResult MyLastBids()
         {
             return View(new MyBidsViewModel());
         }
 
+        [HttpPost, FormValidator]
         public async Task<IActionResult> GetMyLastBids(MyBidsViewModel viewModel)
         {
-            var result = await _bidService.GetListByIdentificationNumberAsync(viewModel.IdentificationNumber);
+            var result = await _bidService.GetLastBidsByIdentificationAsync(viewModel.IdentificationNumber);
 
-            return Ok();
+            if (!result.IsSucceed)
+            {
+                return FormResult.CreateErrorResult(result.Message);
+            }
+
+            return FormResult.CreateSuccessResultWithObject(result.Object);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public async Task<IActionResult> GetInfoByIdentificationAndPlate(string identification, string plate)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var visitorInput = new VisitorInput
+            {
+                IdentificationNumber = identification,
+                LicensePlate = plate
+            };
+
+            var result = await _visitorService.GetInfoByIdentificationAndPlate(visitorInput);
+
+            return Ok(result);
         }
     }
 }

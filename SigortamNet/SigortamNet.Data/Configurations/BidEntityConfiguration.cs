@@ -17,10 +17,6 @@ namespace SigortamNet.Data.Configurations
             builder.Property(x => x.Price)
                 .IsRequired();
 
-            builder.Property(x => x.LicensePlate)
-                .HasMaxLength(20)
-                .IsRequired();
-
             base.Configure(builder);
         }
     }
