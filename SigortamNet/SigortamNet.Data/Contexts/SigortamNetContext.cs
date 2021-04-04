@@ -7,7 +7,8 @@ namespace SigortamNet.Data.Contexts
     public class SigortamNetContext : DbContext
     {
         public SigortamNetContext(DbContextOptions<SigortamNetContext> options) : base(options)
-        {
+        { 
+           //Database.EnsureCreated();
         }
 
         public DbSet<PartnerEntity> Partners { get; set; }
