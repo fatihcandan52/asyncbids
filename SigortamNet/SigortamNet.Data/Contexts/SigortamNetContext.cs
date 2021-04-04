@@ -8,7 +8,6 @@ namespace SigortamNet.Data.Contexts
     {
         public SigortamNetContext(DbContextOptions<SigortamNetContext> options) : base(options)
         {
-
         }
 
         public DbSet<PartnerEntity> Partners { get; set; }
@@ -18,6 +17,7 @@ namespace SigortamNet.Data.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.AddEntityConfiguration();
+            modelBuilder.AddSeedData();
             base.OnModelCreating(modelBuilder);
         }
     }

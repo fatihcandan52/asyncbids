@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SigortamNet.ASigorta.Models;
+using SigortamNet.CSigorta.Models;
 using System;
 using System.Threading;
 
-namespace SigortamNet.ASigorta.Controllers
+namespace SigortamNet.CSigorta.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
@@ -42,11 +42,11 @@ namespace SigortamNet.ASigorta.Controllers
 
             return Ok(new BidDto
             {
-                Name = "A Sigorta",
+                Name = "C Sigorta",
                 Logo = "",
                 LicensePlate = input.LicensePlate,
                 Description = Summaries[rnd.Next(0, Summaries.Length - 1)],
-                Price = rnd.Next(1000, 1500)
+                Price = rnd.Next(2000, 3000)
             });
         }
     }

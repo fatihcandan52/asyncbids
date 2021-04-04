@@ -48,7 +48,7 @@
 @section Scripts {
     <script>
         function MyLastBidsCallBack(e) {
-            debugger;
+            $("#tblLastBids").html("");
             if (e.isSucceed) {
                 var list = e.object;
                 $.each(list, function (index, value) {

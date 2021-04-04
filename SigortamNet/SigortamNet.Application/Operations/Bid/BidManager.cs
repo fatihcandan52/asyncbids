@@ -8,6 +8,7 @@ using SigortamNet.Data.Entities;
 using SigortamNet.Data.Repositories;
 using SigortamNet.Data.UnitOfWork;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SigortamNet.Application.Operations.Bid
@@ -39,7 +40,7 @@ namespace SigortamNet.Application.Operations.Bid
 
         public async Task<ServiceResult<List<BidOutput>>> GetLastBidsByIdentificationAsync(string identificationNumber)
         {
-            var list = await _bidRepository.GetAll().Include(i=> i.Visitor).ToListAsync();
+            var list = await _bidRepository.GetAll().Include(i => i.Visitor).Where(x => x.Visitor.IdentificationNumber == identificationNumber).ToListAsync();
 
             return new ServiceResult<List<BidOutput>>(Status.Success)
             {

@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using SigortamNet.ASigorta.Models;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using SigortamNet.BSigorta.Models;
 
-namespace SigortamNet.ASigorta.Controllers
+namespace SigortamNet.BSigorta.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
@@ -37,16 +40,15 @@ namespace SigortamNet.ASigorta.Controllers
         public IActionResult Post(BidInput input)
         {
             Thread.Sleep(500);
-
             var rnd = new Random();
 
             return Ok(new BidDto
             {
-                Name = "A Sigorta",
+                Name = "B Sigorta",
                 Logo = "",
                 LicensePlate = input.LicensePlate,
                 Description = Summaries[rnd.Next(0, Summaries.Length - 1)],
-                Price = rnd.Next(1000, 1500)
+                Price = rnd.Next(2000, 2500)
             });
         }
     }

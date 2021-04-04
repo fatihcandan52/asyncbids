@@ -8,6 +8,7 @@ using SigortamNet.Application.Contracts.Operations.Visitor;
 using SigortamNet.Contracts.Enums;
 using SigortamNet.Contracts.Results;
 using SigortamNet.MVC.ViewModels;
+using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,43 +72,54 @@ namespace SigortamNet.Integration.Socket
         //Soap servisler içinde araya bir web api yazar onun içerisinde soap entegresyonu tamalanıp dönüşüm tamamlanabilir
         private async Task<ServiceResult<BidOutput>> ApiRequest(VisitorInput input, string apiUrl, InsuranceType insuranceType)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
-            request.Content = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
-
-            var client = _clientFactory.CreateClient();
-            var response = await client.SendAsync(request);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var responseString = await response.Content.ReadAsStringAsync();
-                var output = new BidOutput();
+                var request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
+                request.Content = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
 
-                //Farklı apilerin farklı dönüş tiplerine göre farklı mappingler oluşturulabilir.
-                switch (insuranceType)
+                var client = _clientFactory.CreateClient();
+                var response = await client.SendAsync(request);
+
+
+                if (response.IsSuccessStatusCode)
                 {
-                    case InsuranceType.AInsurance:
-                        output = JsonConvert.DeserializeObject<BidOutput>(responseString);
-                        break;
-                    case InsuranceType.BInsurance:
-                        output = JsonConvert.DeserializeObject<BidOutput>(responseString);
-                        break;
-                    case InsuranceType.CInsurance:
-                        output = JsonConvert.DeserializeObject<BidOutput>(responseString);
-                        break;
-                    default:
-                        break;
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    var output = new BidOutput();
+
+                    //Farklı apilerin farklı dönüş tiplerine göre farklı mappingler oluşturulabilir.
+                    switch (insuranceType)
+                    {
+                        case InsuranceType.AInsurance:
+                            output = JsonConvert.DeserializeObject<BidOutput>(responseString);
+                            break;
+                        case InsuranceType.BInsurance:
+                            output = JsonConvert.DeserializeObject<BidOutput>(responseString);
+                            break;
+                        case InsuranceType.CInsurance:
+                            output = JsonConvert.DeserializeObject<BidOutput>(responseString);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    return new ServiceResult<BidOutput>(Status.Success)
+                    {
+                        Object = output
+                    };
                 }
 
-                return new ServiceResult<BidOutput>(Status.Success)
+                return new ServiceResult<BidOutput>(Status.Error)
                 {
-                    Object = output
+                    Message = "Teklif getirilirken bir hata oluştu"
                 };
             }
-
-            return new ServiceResult<BidOutput>(Status.Error)
+            catch (Exception ex)
             {
-                Message = "Teklif getirilirken bir hata oluştu"
-            };
+                return new ServiceResult<BidOutput>(Status.Error)
+                {
+                    Message = "Teklif getirilirken bir hata oluştu"
+                };
+            }
         }
     }
 }
