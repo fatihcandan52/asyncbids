@@ -1,14 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="ASigorta\" />
-    <Folder Include="BSigorta\" />
-    <Folder Include="CSigorta\" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SigortamNet.Integration.Contracts\SigortamNet.Integration.Contracts.csproj" />

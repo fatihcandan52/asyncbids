@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SigortamNet.Application.Contracts\SigortamNet.Application.Contracts.csproj" />
     <ProjectReference Include="..\SigortamNet.Data\SigortamNet.Data.csproj" />
+    <ProjectReference Include="..\SigortamNet.Integration\SigortamNet.Integration.csproj" />
   </ItemGroup>
 
 </Project>

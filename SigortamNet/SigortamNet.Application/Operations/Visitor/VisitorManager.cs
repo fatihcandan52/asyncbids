@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SigortamNet.Application.Contracts.Operations.Visitor;
 using SigortamNet.Contracts.Enums;
 using SigortamNet.Contracts.Results;
@@ -38,7 +39,7 @@ namespace SigortamNet.Application.Operations.Visitor
 
         public async Task<ServiceResult<List<VisitorOutput>>> GetListAsync()
         {
-            var list = await _visitorRepository.GetListAsync();
+            var list = await _visitorRepository.GetList().ToListAsync();
 
             return new ServiceResult<List<VisitorOutput>>(Status.Success)
             {
@@ -48,7 +49,7 @@ namespace SigortamNet.Application.Operations.Visitor
 
         public async Task<ServiceResult<VisitorOutput>> GetListByIdentificationAndPlateAsync(VisitorInput input)
         {
-            var list = await _visitorRepository.GetListAsync();
+            var list = await _visitorRepository.GetList().ToListAsync();
 
             return new ServiceResult<VisitorOutput>(Status.Success)
             {

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SigortamNet.Application.Contracts.Operations.Bid;
 using SigortamNet.Contracts.Enums;
 using SigortamNet.Contracts.Results;
@@ -37,12 +38,17 @@ namespace SigortamNet.Application.Operations.Bid
 
         public async Task<ServiceResult<List<BidOutput>>> GetListByIdentificationNumberAsync()
         {
-            var list = await _bidRepository.GetListAsync();
+            var list = await _bidRepository.GetList().ToListAsync();
 
             return new ServiceResult<List<BidOutput>>(Status.Success)
             {
                 Object = _mapper.Map<List<BidOutput>>(list)
             };
+        }
+
+        public Task<ServiceResult<List<BidOutput>>> GetListByIdentificationNumberAsync(string identificationNumber)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

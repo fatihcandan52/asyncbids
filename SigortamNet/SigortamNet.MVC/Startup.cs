@@ -6,10 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SigortamNet.Application.Operations.Partner;
 using SigortamNet.Data.Contexts;
 using SigortamNet.MVC.Extensions;
-using AutoMapper;
-using SigortamNet.Application.Operations.Partner;
 
 namespace SigortamNet.MVC
 {

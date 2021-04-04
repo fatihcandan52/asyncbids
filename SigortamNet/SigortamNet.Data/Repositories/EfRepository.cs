@@ -4,10 +4,11 @@ using SigortamNet.Data.Entities;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace SigortamNet.Data.Repositories
 {
-    public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity 
+    public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly DbSet<TEntity> _dbSet;
 
@@ -16,12 +17,12 @@ namespace SigortamNet.Data.Repositories
             _dbSet = context.Set<TEntity>();
         }
 
-        public void Add(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
-            if(entity == null)
+            if (entity == null)
                 throw new ArgumentNullException($"Entity boş olamaz. Tip: {nameof(TEntity)}");
 
-            _dbSet.Add(entity);
+            await _dbSet.AddAsync(entity);
         }
 
         public IQueryable<TEntity> GetList(Expression<Func<TEntity, bool>> query = null)
@@ -29,9 +30,9 @@ namespace SigortamNet.Data.Repositories
             return query == null ? _dbSet : _dbSet.Where(query);
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> query)
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> query)
         {
-            return _dbSet.SingleOrDefault(query);
+            return await _dbSet.SingleOrDefaultAsync(query);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SigortamNet.Application.Contracts.Operations.Partner;
 using SigortamNet.Contracts.Enums;
 using SigortamNet.Contracts.Results;
@@ -37,7 +38,7 @@ namespace SigortamNet.Application.Operations.Partner
 
         public async Task<ServiceResult<List<PartnerOutput>>> GetListAsync()
         {
-            var list = await _partnerRepository.GetListAsync();
+            var list = await _partnerRepository.GetList().ToListAsync();
 
             return new ServiceResult<List<PartnerOutput>>(Status.Success)
             {

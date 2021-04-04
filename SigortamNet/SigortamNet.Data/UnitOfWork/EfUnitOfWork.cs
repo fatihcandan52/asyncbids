@@ -10,7 +10,7 @@ namespace SigortamNet.Data.UnitOfWork
     public class EfUnitOfWork : IUnitOfWork
     {
         private readonly SigortamNetContext _context;
-        private readonly Dictionary<string, dynamic> _repositoryDictionary; //TODO: 
+        private readonly Dictionary<string, dynamic> _repositoryDictionary;
 
         public EfUnitOfWork(SigortamNetContext context)
         {
@@ -26,7 +26,7 @@ namespace SigortamNet.Data.UnitOfWork
 
             if (!repositoryCreated)
             {
-                var newRepository = new EfRepository<TEntity>(_context); // TODO: 
+                var newRepository = new EfRepository<TEntity>(_context);
                 _repositoryDictionary.Add(entityName, newRepository);
             }
 
@@ -41,12 +41,6 @@ namespace SigortamNet.Data.UnitOfWork
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();
-        }
-
-        // TODO: 
-        public void Dispose()
-        {
-            _context?.Dispose();
         }
     }
 }
